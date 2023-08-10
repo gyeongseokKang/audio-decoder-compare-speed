@@ -1,6 +1,9 @@
 # Audio Decode Compare
-
+<img width="1637" alt="image" src="https://github.com/gyeongseokKang/audio-decoder-compare-speed/assets/61446585/a51b2992-2abb-441a-85f7-2a7450d4704d">
 "Audio Decode Compare"는 다양한 오디오 디코딩 라이브러리를 비교하는 간단한 웹 애플리케이션입니다. 이 서비스는 @soundcut/decode-audio-data-fast, audio-decode, 그리고 브라우저 내장 디코더를 비교하며, 각 라이브러리가 오디오 파일을 디코딩하는 시간을 밀리초(ms) 단위로 테이블로 나타냅니다. 이 서비스는 스벨트 타입스크립트로 개발되었으며 Vercel을 통해 배포되었습니다.
+
+
+
 
 ## 주요 기능
 
