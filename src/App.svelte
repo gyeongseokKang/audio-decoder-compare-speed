@@ -6,6 +6,7 @@
 
   function decodeFileAudioData(file) {
     const audioCtx = new window.AudioContext();
+    console.log(navigator.hardwareConcurrency);
     return getFileAudioBuffer(file, audioCtx);
   }
 
@@ -34,9 +35,9 @@
       name: file.name,
       size: file.size,
       type: file.type,
-      default: 0,
-      fast: 0,
-      fast2: 0,
+      default: undefined,
+      fast: undefined,
+      fast2: undefined,
     };
     if (file) {
       isDecoding = true;
@@ -50,13 +51,23 @@
         item.default = new Date().getTime() - prev;
       });
 
-      const prev2 = new Date().getTime();
-      await decodeFileAudioData(file);
-      item.fast = new Date().getTime() - prev2;
+      try {
+        const prev2 = new Date().getTime();
+        await decodeFileAudioData(file);
+        item.fast = new Date().getTime() - prev2;
+      } catch (e) {
+        console.log(e);
+        item.fast = "error";
+      }
 
-      const prev3 = new Date().getTime();
-      await decodeAudio(await file.arrayBuffer());
-      item.fast2 = new Date().getTime() - prev3;
+      try {
+        const prev3 = new Date().getTime();
+        await decodeAudio(await file.arrayBuffer());
+        item.fast2 = new Date().getTime() - prev3;
+      } catch (e) {
+        console.log(e);
+        item.fast2 = "error";
+      }
 
       // const prev4 = new Date().getTime();
       // AudioFileDecoder.getAudioDecoder(DecodeAudioWasm, file).then((decoder) => {
