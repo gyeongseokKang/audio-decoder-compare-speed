@@ -169,7 +169,7 @@
   }
 
   table {
-    width: min(100%, 1000px);
+    width: min(100%, 1600px);
     border-collapse: collapse;
     margin-top: 10px;
   }
