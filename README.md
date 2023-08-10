@@ -1,47 +1,46 @@
-# Svelte + TS + Vite
+# Audio Decode Compare
 
-This template should help get you started developing with Svelte and TypeScript in Vite.
+"Audio Decode Compare"는 다양한 오디오 디코딩 라이브러리를 비교하는 간단한 웹 애플리케이션입니다. 이 서비스는 @soundcut/decode-audio-data-fast, audio-decode, 그리고 브라우저 내장 디코더를 비교하며, 각 라이브러리가 오디오 파일을 디코딩하는 시간을 밀리초(ms) 단위로 테이블로 나타냅니다. 이 서비스는 스벨트 타입스크립트로 개발되었으며 Vercel을 통해 배포되었습니다.
 
-## Recommended IDE Setup
+## 주요 기능
 
-[VS Code](https://code.visualstudio.com/) + [Svelte](https://marketplace.visualstudio.com/items?itemName=svelte.svelte-vscode).
+- **다양한 라이브러리 비교**: @soundcut/decode-audio-data-fast, audio-decode, 브라우저 내장 디코더의 디코딩 성능을 비교할 수 있습니다.
+- **디코딩 시간 표시**: 업로드한 오디오 파일을 각 라이브러리로 디코딩하는 시간을 밀리초(ms) 단위로 테이블로 나타냅니다.
+- **간편한 사용**: 단순한 인터페이스를 통해 오디오 파일을 업로드하고 디코딩 시간을 확인할 수 있습니다.
 
-## Need an official Svelte framework?
+## 사용 방법
 
-Check out [SvelteKit](https://github.com/sveltejs/kit#readme), which is also powered by Vite. Deploy anywhere with its serverless-first approach and adapt to various platforms, with out of the box support for TypeScript, SCSS, and Less, and easily-added support for mdsvex, GraphQL, PostCSS, Tailwind CSS, and more.
+1.  서비스에 접속합니다.
+2.  "Choose File" 버튼을 클릭하여 디코딩할 오디오 파일을 업로드합니다.
+3.  각 라이브러리별로 오디오 파일의 디코딩 시간이 테이블로 표시됩니다.
 
-## Technical considerations
+## 기술 스택
 
-**Why use this over SvelteKit?**
+- **프론트엔드**: 스벨트 (Svelte)와 타입스크립트를 사용하여 개발되었습니다.
+- **배포**: Vercel을 통해 배포되었습니다.
 
-- It brings its own routing solution which might not be preferable for some users.
-- It is first and foremost a framework that just happens to use Vite under the hood, not a Vite app.
+## 개발 및 배포
 
-This template contains as little as possible to get started with Vite + TypeScript + Svelte, while taking into account the developer experience with regards to HMR and intellisense. It demonstrates capabilities on par with the other `create-vite` templates and is a good starting point for beginners dipping their toes into a Vite + Svelte project.
+이 서비스는 스벨트와 타입스크립트를 활용하여 개발되었습니다. Vercel을 이용하여 손쉽게 배포되었습니다.
 
-Should you later need the extended capabilities and extensibility provided by SvelteKit, the template has been structured similarly to SvelteKit so that it is easy to migrate.
+1.  먼저 프로젝트를 클론하거나 다운로드합니다.
 
-**Why `global.d.ts` instead of `compilerOptions.types` inside `jsconfig.json` or `tsconfig.json`?**
+    ```
+    git clone https://github.com/gyeongseokKang/audio-decoder-compare-speed.git
+    ```
 
-Setting `compilerOptions.types` shuts out all other types not explicitly listed in the configuration. Using triple-slash references keeps the default TypeScript setting of accepting type information from the entire workspace, while also adding `svelte` and `vite/client` type information.
+2.  프로젝트 폴더로 이동한 후, 필요한 의존성을 설치합니다.
 
-**Why include `.vscode/extensions.json`?**
+    ```
+    npm install
+    ```
 
-Other templates indirectly recommend extensions via the README, but this file allows VS Code to prompt the user to install the recommended extension upon opening the project.
+3.  개발 서버를 실행하여 로컬에서 프로젝트를 실행합니다.
 
-**Why enable `allowJs` in the TS template?**
+    ```
+    npm run dev
+    ```
 
-While `allowJs: false` would indeed prevent the use of `.js` files in the project, it does not prevent the use of JavaScript syntax in `.svelte` files. In addition, it would force `checkJs: false`, bringing the worst of both worlds: not being able to guarantee the entire codebase is TypeScript, and also having worse typechecking for the existing JavaScript. In addition, there are valid use cases in which a mixed codebase may be relevant.
+## 라이선스
 
-**Why is HMR not preserving my local component state?**
-
-HMR state preservation comes with a number of gotchas! It has been disabled by default in both `svelte-hmr` and `@sveltejs/vite-plugin-svelte` due to its often surprising behavior. You can read the details [here](https://github.com/rixo/svelte-hmr#svelte-hmr).
-
-If you have state that's important to retain within a component, consider creating an external store which would not be replaced by HMR.
-
-```ts
-// store.ts
-// An extremely simple external store
-import { writable } from 'svelte/store'
-export default writable(0)
-```
+없.

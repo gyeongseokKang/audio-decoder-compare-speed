@@ -1,8 +1,6 @@
 <script lang="ts">
   import { getFileAudioBuffer } from "@soundcut/decode-audio-data-fast";
   import decodeAudio from "audio-decode";
-  // import * as AudioFileDecoder from "audio-file-decoder";
-  // import DecodeAudioWasm from "audio-file-decoder/decode-audio.wasm";
 
   function decodeFileAudioData(file) {
     const audioCtx = new window.AudioContext();
@@ -23,7 +21,6 @@
 
   let audioBuffer: AudioBuffer | null = null; // 로드된 AudioBuffer를 저장할 변수
   let audioContext: AudioContext | null = null; // AudioContext를 저장할 변수
-  let isPlaying = false; // 오디오 재생 상태를 저장할 변수
   let tableItem = [];
   let isDecoding = false;
 
@@ -41,7 +38,6 @@
     };
     if (file) {
       isDecoding = true;
-      let audioBuffer: AudioBuffer | null = null; // 로드된 AudioBuffer를 저장할 변수
       const arrayBuffer = await file.arrayBuffer();
       audioContext = new AudioContext();
       const prev = new Date().getTime();
@@ -69,52 +65,26 @@
         item.fast2 = "error";
       }
 
-      // const prev4 = new Date().getTime();
-      // AudioFileDecoder.getAudioDecoder(DecodeAudioWasm, file).then((decoder) => {
-      //   // samples are returned as a Float32Array
-      //   let samples;
-
-      //   // decode entire audio file
-      //   samples = decoder.decodeAudioData();
-
-      //   console.log(samples);
-
-      //   // ALWAYS dispose once finished to free resources
-      //   decoder.dispose();
-      // });
       tableItem = [...tableItem, item];
 
       isDecoding = false;
       console.log(tableItem);
     }
   }
-
-  function playAudio() {
-    if (audioBuffer && audioContext) {
-      const source = audioContext.createBufferSource();
-      source.buffer = audioBuffer;
-      source.connect(audioContext.destination);
-      source.start(0);
-      isPlaying = true;
-    }
-  }
-
-  function stopAudio() {
-    if (audioContext) {
-      audioContext.close();
-      audioContext = null;
-      isPlaying = false;
-    }
-  }
 </script>
 
 <main>
+  <header>
+    <div />
+    <a
+      href="https://github.com/gyeongseokKang/audio-decoder-compare-speed"
+      target="_blank"
+    >
+      github
+    </a>
+  </header>
   <h1>Audio Decode Compare</h1>
   <input type="file" accept="audio/*" on:change={handleFileChange} />
-  {#if audioBuffer}
-    <button on:click={playAudio}>재생</button>
-    <button on:click={stopAudio}>정지</button>
-  {/if}
 
   {#if isDecoding}
     <p>Decoding...</p>
@@ -166,7 +136,24 @@
 <style>
   main {
     text-align: center;
-    padding: 20px;
+    height: 100%;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    background-color: #999;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
   }
 
   a {
@@ -182,7 +169,7 @@
   }
 
   table {
-    width: 100%;
+    width: min(100%, 1000px);
     border-collapse: collapse;
     margin-top: 10px;
   }
